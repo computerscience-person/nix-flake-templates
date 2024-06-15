@@ -10,8 +10,10 @@
   in {
     devShells = eachSystem (system: let
       pkgs = withPkgs system;
-      in pkgs.mkShell {
+    in { 
+      default = pkgs.mkShell {
         packages = [];
-      });
+      };
+    });
   };
 }
