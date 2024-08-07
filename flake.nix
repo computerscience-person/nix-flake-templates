@@ -10,6 +10,10 @@
         path = ./ocaml;
         description = "Developing with OCaml.";
       };
+      rust = {
+        path = ./rust;
+        description = "Developing with Rust, using fenix complete toolchain.";
+      };
       default = self.templates.base;
     };
   };
