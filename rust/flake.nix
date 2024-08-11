@@ -16,7 +16,7 @@
       fenix = withFenix system;
     in { 
       default = pkgs.mkShell.override { 
-        stdenv = pkgs.mold-wrapped.stdenv;
+        stdenv = pkgs.stdenvAdapters.useMoldLinker pkgs.stdenv;
       } {
         packages = [
           fenix.complete.toolchain
