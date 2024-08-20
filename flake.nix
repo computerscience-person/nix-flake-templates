@@ -14,6 +14,10 @@
         path = ./rust;
         description = "Developing with Rust, using fenix complete toolchain.";
       };
+      flutter = {
+        path = ./dart/flutter;
+        description = "Developing with Flutter.";
+      };
       flutter-android = {
         path = ./dart/flutter/with_android;
         description = "Developing with Flutter and Android Studio.";
