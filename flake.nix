@@ -19,7 +19,7 @@
         description = "Developing with Flutter.";
       };
       flutter-android = {
-        path = ./dart/flutter/with_android;
+        path = ./dart/flutter_with_android;
         description = "Developing with Flutter and Android Studio.";
       };
       default = self.templates.base;
