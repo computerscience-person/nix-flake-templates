@@ -16,6 +16,7 @@
       default = pkgs.mkShell {
         packages = [
           pkgs.flutter
+          pkgs.dart
         ];
       };
     });
