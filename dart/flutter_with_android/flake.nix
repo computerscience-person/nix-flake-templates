@@ -19,7 +19,7 @@
         packages = [
           jdk
           pkgs.flutter
-          pkgs.android-studio-full
+          pkgs.gradle
         ];
       };
     });
