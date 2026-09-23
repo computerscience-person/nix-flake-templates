@@ -3,17 +3,28 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
   };
-  outputs = { nixpkgs, ... }@inputs: let
-    systems = [ "x86_64-linux" "aarch64-linux" ];
+  outputs = {nixpkgs, ...} @ inputs: let
+    systems = ["x86_64-linux" "aarch64-linux"];
     eachSystem = nixpkgs.lib.genAttrs systems;
-    withPkgs = system: nixpkgs.legacyPackages.${system};
-  in {
-    devShells = eachSystem (system: let
-      pkgs = withPkgs system;
-    in { 
-      default = pkgs.mkShell {
-        packages = [];
-      };
+    withPkgs = system: (import nixpkgs {
+      inherit system;
     });
-  };
+
+    perSystem = eachSystem (
+      system: let
+        pkgs = withPkgs system;
+      in
+        with pkgs; {
+          formatter = alejandra;
+          devShells = {
+            default = mkShell {
+              packages = [
+              ];
+            };
+          };
+        }
+    );
+    formatter = nixpkgs.lib.mapAttrs (_: v: v.formatter) perSystem;
+    devShells = nixpkgs.lib.mapAttrs (_: v: v.devShells) perSystem;
+  in {inherit formatter devShells;};
 }
