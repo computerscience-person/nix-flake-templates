@@ -1,7 +1,7 @@
 {
   description = "The base nix flake.";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.zst";
   };
   outputs = {nixpkgs, ...} @ inputs: let
     systems = ["x86_64-linux" "aarch64-linux"];
