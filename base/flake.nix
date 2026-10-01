@@ -4,8 +4,8 @@
     nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.zst";
   };
   outputs = {nixpkgs, ...} @ inputs: let
-    systems = ["x86_64-linux" "aarch64-linux"];
-    eachSystem = nixpkgs.lib.genAttrs systems;
+    inherit (nixpkgs) lib;
+    eachSystem = lib.genAttrs lib.systems.flakeExposed;
     withPkgs = system: (import nixpkgs {
       inherit system;
     });
@@ -22,9 +22,13 @@
               ];
             };
           };
+          package = {
+            default = {};
+          };
         }
     );
     formatter = nixpkgs.lib.mapAttrs (_: v: v.formatter) perSystem;
     devShells = nixpkgs.lib.mapAttrs (_: v: v.devShells) perSystem;
-  in {inherit formatter devShells;};
+    package = nixpkgs.lib.mapAttrs (_: v: v.package) perSystem;
+  in {inherit formatter devShells package;};
 }
